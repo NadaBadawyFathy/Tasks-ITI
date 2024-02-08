@@ -1,0 +1,87 @@
+body {
+    margin-right:5px ;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+     grid-template-rows: 100px auto 100px; 
+    grid-template-areas: "head head head" "custom custom link" "about title title";
+}
+#header {
+    width: 100%;
+    grid-area: head;
+    padding: 5px;
+    color: white;
+    background-color: cadetblue;
+    text-align: center;
+    margin: auto;
+}
+#customerslist{
+    grid-area: custom;
+    background-color: ghostwhite;
+    border-spacing: 0px;
+    margin: 5px 20px 5px 5px;
+    display: grid;
+}
+ /* h2 {
+    grid-area: hh;
+} */
+table {
+    grid-template-columns: repeat(3,auto);
+    grid-template-rows: repeat(11,auto); 
+}
+table thead th{
+    background-color: blue;
+    color: white;
+    padding: 5px;
+}
+td {
+    border: 1px solid white;
+    padding: 5px;
+}
+#linksbar {
+    grid-area: link;
+    border-left: 2px solid black;
+    padding: 10px;
+}
+#aboutus {
+    width: 500px;
+    grid-area: about;
+    float: left;
+    margin: 10px;
+    padding-right: 40px;
+}
+#titles {
+    grid-area: title;
+    display: flex;
+    flex-direction: row;
+}
+#titles p{
+    margin: 10px;
+    padding-right: 90px;
+}
+#linksbar ul li{
+    list-style-type: none;
+    margin: 5px;
+}
+#linksbar ul li a{
+    padding: 2px 40px;
+    background-color: teal;
+    color: white;
+    border-radius: 3px;
+}
+ input {
+   margin: 15px;
+   display: block;
+}
+div button {
+    padding: 2px 40px;
+    background-color: blue;
+    color: white;
+    border-radius: 3px;
+}
+tr:nth-child(odd){
+    background-color: royalblue;
+}
+input:nth-child(5){
+    display: none;
+}

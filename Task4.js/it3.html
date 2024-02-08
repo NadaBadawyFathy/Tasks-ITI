@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="main3.js">
+
+</head>
+<body>
+  <div id="slider-container">
+    <img id="slider-image" src="" alt="">
+    <div id="slider-text"></div>
+  </div>
+  <button id="play">Play</button>
+  <button id="stop">Stop</button>
+  <button id="next">Next</button>
+  <button id="previous">Previous</button>
+  <button id="speed1x">1x 6s</button>
+  <button id="speed2x">2x 4s</button>
+  <button id="speed3x">3x 2s</button>
+  <script>
+
+const sliderImage = document.getElementById('slider-image');
+    const sliderText = document.getElementById('slider-text');
+    const playButton = document.getElementById('play');
+    const stopButton = document.getElementById('stop');
+    const nextButton = document.getElementById('next');
+    const previousButton = document.getElementById('previous');
+    const speed1xButton = document.getElementById('speed1x');
+    const speed2xButton = document.getElementById('speed2x');
+    const speed3xButton = document.getElementById('speed3x');
+
+    let currentIndex = 0;
+    let images = [];
+    let intervalId;
+    let speed = 6000; // 6 seconds
+
+    function fetchImages() {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://jsonplaceholder.typicode.com/albums/1/photos');
+      xhr.onload = function () {
+        if (xhr.status === 200) {
+          images = JSON.parse(xhr.responseText);
+          showImage(currentIndex);
+        }
+      };
+      xhr.send();
+    }
+
+    function showImage(index) {
+      if (images.length === 0) return;
+      const image = images[index];
+      sliderImage.src = image.url;
+      sliderText.textContent = image.title;
+    }
+
+    function startAutoPlay() {
+      intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        showImage(currentIndex);
+      }, speed);
+    }
+
+    function stopAutoPlay() {
+      clearInterval(intervalId);
+    }
+
+    playButton.addEventListener('click', startAutoPlay);
+    stopButton.addEventListener('click', stopAutoPlay);
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % images.length;
+      showImage(currentIndex);
+    });
+    previousButton.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      showImage(currentIndex);
+    });
+    speed1xButton.addEventListener('click', () => {
+      speed = 6000;
+      stopAutoPlay();
+      startAutoPlay();
+    });
+    speed2xButton.addEventListener('click', () => {
+      speed = 4000;
+      stopAutoPlay();
+      startAutoPlay();
+    });
+    speed3xButton.addEventListener('click', () => {
+      speed = 2000;
+      stopAutoPlay();
+      startAutoPlay();
+    });
+
+    fetchImages();
+  </script>
+    
+</body>
+</html>
